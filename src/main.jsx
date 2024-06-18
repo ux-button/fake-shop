@@ -1,21 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import './index.css'
+import { Shop } from './Shop'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    elemet: <Shop />,
+    element: <Shop />,
   },
-  {
-    path: '/:name',
-    element: <Item />,
-  },
-  {
-    path: '/checkout',
-    element: <Checkout />,
-  },
+  // {
+  //   path: '/:name',
+  //   element: <Item />,
+  // },
+  // {
+  //   path: '/checkout',
+  //   element: <Checkout />,
+  // },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
