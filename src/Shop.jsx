@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+
+import { ItemCard } from './components/ItemCard';
 import styles from './Shop.module.css'
-import { ItemCart } from './components/ItemCard';
+
 
 const Shop = () => {
     const [ isLoading, setIsLoading ] = useState(true);
@@ -16,7 +18,7 @@ const Shop = () => {
                 }
                 const items = await response.json();
                 setAllItems(
-                    items.map(item => <ItemCart key={item.id} item={item} />)
+                    items.map(item => <ItemCard key={item.id} item={item} />)
                 );
             } catch (error) {
                 console.log(error);

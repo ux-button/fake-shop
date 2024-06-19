@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './ItemCard.module.css'
 
-const ItemCart = (props) => {
+const ItemCard = (props) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -18,4 +18,4 @@ const ItemCart = (props) => {
     )
 }
 
-export { ItemCart }
+export { ItemCard }
