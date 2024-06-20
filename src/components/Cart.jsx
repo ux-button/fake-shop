@@ -1,5 +1,4 @@
 import { useReducer } from "react"
-import { Reducer, initialCart } from "../Reducer"
 import styles from './Cart.module.css'
 
 function Cart ({ items }) {

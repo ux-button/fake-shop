@@ -5,7 +5,7 @@ import { Reducer, currentCart, ACTIONS } from '../Reducer';
 
 const ItemCard = (props) => {
     const navigate = useNavigate();
-    const [cart, despatch] = useReducer(Reducer, initialCart);
+    const [cart, despatch] = useReducer(Reducer, currentCart);
 
     function handleClick () {
         navigate(`/item/${props.item.id}`)

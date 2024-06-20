@@ -9,7 +9,7 @@ const Item = () => {
     const [ itemParam, setItemParam ] = useState();
     const { name } = useParams();
 
-    const [cart, despatch] = useReducer(Reducer, initialCart);
+    const [cart, despatch] = useReducer(Reducer, currentCart);
 
     useEffect(() => {
         const fetchItem = async (url) => {

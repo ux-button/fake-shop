@@ -11,7 +11,7 @@ const Shop = () => {
     const [ isLoading, setIsLoading ] = useState(true);
     const [ allItems, setAllItems ] = useState();
 
-    const [ cart, despatch ] = useReducer(Reducer, initialCart);
+    const [ cart, despatch ] = useReducer(Reducer, currentCart);
 
     useEffect(() => {
         const fetchItems = async (url) => {

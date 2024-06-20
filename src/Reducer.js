@@ -16,9 +16,9 @@ const ACTIONS = {
 function Reducer (currentCart, action) {
     switch (action.type) {
         case ACTIONS.ADD_TO_CART:
-            return [...initialCart,
+            return ([...currentCart,
                 {
-                    id: initialCart + 1,
+                    id: currentCart + 1,
                     quantity: 1,
                     item: {
                         id: action.payload.id,
@@ -26,7 +26,7 @@ function Reducer (currentCart, action) {
                         price: action.payload.price,
                     }
                 }
-            ]
+            ])
     }
 }
 
