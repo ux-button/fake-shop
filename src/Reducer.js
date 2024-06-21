@@ -1,5 +1,3 @@
-import { act } from "react"
-
 const currentCart = [{
     id: 1,
     quantity: 1,
@@ -18,7 +16,7 @@ function Reducer (currentCart, action) {
         case ACTIONS.ADD_TO_CART:
             return ([...currentCart,
                 {
-                    id: currentCart + 1,
+                    id: currentCart.id + 1,
                     quantity: 1,
                     item: {
                         id: action.payload.id,
