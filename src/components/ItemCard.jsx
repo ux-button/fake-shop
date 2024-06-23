@@ -1,23 +1,34 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import styles from './ItemCard.module.css'
-import { useReducer } from 'react';
-import { Reducer, currentCart, ACTIONS } from '../Reducer';
+import { useOutletContext } from 'react-router-dom';
 
-const ItemCard = (props) => {
+
+const ItemCard = ({ item }) => {
     const navigate = useNavigate();
-    const [cart, despatch] = useReducer(Reducer, currentCart);
+    const [ state, dispatch ] = useOutletContext();
 
     function handleClick () {
-        navigate(`/item/${props.item.id}`)
+        navigate(`/item/${item.id}`)
+    }
+
+    function handleAddToCart () {
+        dispatch({
+            type: 'add-to-cart',
+            payload: {
+                id: item.id,
+                title: item.title,
+                price: item.price,
+            }
+        })
     }
 
     return (
         <div className={styles.card}>
-            <img className={styles.image} src={props.item.image} />
-            <h3 onClick={handleClick}>{props.item.title}</h3>
-            <p>{props.item.price}</p>
+            <img className={styles.image} src={item.image} />
+            <h3 onClick={handleClick}>{item.title}</h3>
+            <p>{item.price}</p>
             <button onClick={handleClick}>Details</button>
-            <button onClick={() => props.handleClick(props.item)}>Add to cart</button>
+            <button onClick={handleAddToCart}>Add to cart</button>
         </div>
     )
 }

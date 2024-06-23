@@ -1,39 +1,17 @@
-import { useEffect, useState, useReducer } from "react";
+import { useReducer } from "react";
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom";
-import { Cart } from "./components/Cart";
-import { Reducer, currentCart, ACTIONS } from './Reducer';
 import { useFetchItems } from "./DataFetcher";
+import { useOutletContext } from "react-router-dom";
 
 const Item = () => {
     const { name } = useParams();
-    const { data } = useFetchItems('https://fakestoreapi.com/products/' + name, 'one')
-    console.log(data)
-
-    const [cart, despatch] = useReducer(Reducer, currentCart);
-
-    // useEffect(() => {
-    //     const fetchItem = async (url) => {
-    //         try {
-    //             const response = await fetch(url, {mode: 'cors'});
-    //             if (!response.ok) {
-    //                 throw new Error(`Server respond ${response.status}`);
-    //             }
-    //             const itemData = await response.json();
-    //             setItemParam(itemData);
-    //         } catch (error) {
-    //             console.log(error)
-    //         } finally {
-    //             setIsLoading(false);
-    //         }
-    //     }
-
-    //     fetchItem('https://fakestoreapi.com/products/' + name)
-    // }, [])
+    const { data } = useFetchItems('https://fakestoreapi.com/products/' + name);
+    const [ state, dispatch ] = useOutletContext();
 
     function handleAddToCart () {
-        despatch({
-            type: ACTIONS.ADD_TO_CART,
+        dispatch({
+            type: 'add-to-cart',
             payload: {
                 id: data.id,
                 title: data.title,
@@ -48,8 +26,6 @@ const Item = () => {
         )
     }
 
-    console.log(cart)
-
     return (
         <>
             <Link to='/'>Back to all products</Link>
@@ -59,7 +35,6 @@ const Item = () => {
             <button onClick={handleAddToCart}>Add to cart</button>
             <p>{data.description}</p>
             <p>{data.category}</p>
-            <Cart id='thisCart' items={cart} />
         </>
     )
 }

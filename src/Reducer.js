@@ -1,30 +1,66 @@
-const currentCart = [{
-    id: 1,
-    quantity: 1,
-    item: {
-        id: 13244,
-        title: 'Bodysuite V-neck',
-        price: 100,
-    }}]
+const currentCart = []
 
 const ACTIONS = {
     ADD_TO_CART: 'add-to-cart',
+    REMOVE_FROM_CART: 'remove-from-cart',
+    DECREASE: 'decrease',
+    INCREASE: 'increase',
 }
 
-function Reducer (currentCart, action) {
+function Reducer (state, action) {
     switch (action.type) {
         case ACTIONS.ADD_TO_CART:
-            return ([...currentCart,
+            const exist = state.filter(item => item.id === action.payload.id);
+            if (exist.length) {
+                return state.map(item => {
+                    if (item.id === action.payload.id) {
+                        return {
+                            ...item,
+                            id: item.id,
+                            quantity: item.quantity++,
+                        }
+                    } else {
+                        return item
+                    }
+                })
+            }
+            return [
+                ...state,
                 {
-                    id: currentCart.id + 1,
+                    id: action.payload.id,
                     quantity: 1,
                     item: {
-                        id: action.payload.id,
                         title: action.payload.title,
                         price: action.payload.price,
                     }
                 }
-            ])
+            ]
+        case ACTIONS.REMOVE_FROM_CART:
+            return (
+                state.filter(item => item.id !== action.payload.id)
+            )
+        case ACTIONS.DECREASE:
+            return state.map(item => {
+                if (item.id === action.payload.id) {
+                    return {
+                        ...item,
+                        quantity: item.quantity--
+                    }
+                } else {
+                    return item
+                }
+            })
+        case ACTIONS.INCREASE: 
+            return state.map(item => {
+                if (item.id === action.payload.id) {
+                    return {
+                        ...item,
+                        quantity: item.quantity++
+                    }
+                } else {
+                    return item
+                }
+            })
     }
 }
 

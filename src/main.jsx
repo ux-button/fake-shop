@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Shop } from './Shop'
 import { Item } from './Item'
+import { Navigation } from './components/Navigation'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Shop />,
+    element: <Navigation />,
+    children: [
+      { index: true, element: <Shop /> },
+      { path: 'item/:name', element: <Item /> }
+    ]
   },
   {
     path: '/item/:name',
